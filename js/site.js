@@ -2,38 +2,29 @@
 // ENTRY POINT
 // Controller Function
 function getValues() {
-    let startNumber = document.getElementById('startValue').value;
-    let endNumber = document.getElementById('endValue').value;
+    let fizzNumber = document.getElementById('startValue').value;
+    let buzzNumber = document.getElementById('endValue').value;
     let stopNumber = document.getElementById('stopValue').value;
 
-    startNumber = Number(startNumber);
-    endNumber = Number(endNumber);
+    fizzNumber = Number(fizzNumber);
+    buzzNumber = Number(buzzNumber);
     stopNumber = Number(stopNumber);
 
     //making sure we have a number in field
-    if (isNaN(startNumber) == true || isNaN(endNumber) == true || isNaN(stopNumber) == true) {
+    if (isNaN(fizzNumber) == true || isNaN(buzzNumber) == true || isNaN(stopNumber) == true) {
 
         Swal.fire({
             title: 'Oops!',
-            text: 'Hundo only works with real numbers.',
+            text: 'FizzBuzz only works with real numbers.',
             icon: 'error',
             backdrop: false
         });
 
-        //make sure end number is greater than start number
-    } else if (startNumber > endNumber) {
 
-        Swal.fire({
-            title: 'Oops!',
-            text: 'The starting number must be less than the ending number.',
-            icon: 'error',
-            backdrop: false
-        });
-        
     } else {
-        let numberArray = generateNumbers(startNumber, endNumber, stopNumber);
+        let numberArray = generateFizzBuzz(fizzNumber, buzzNumber);
 
-        displayNumbers(numberArray);
+        displayFizzBuzz(numberArray);
     }
 
 
@@ -45,40 +36,42 @@ function generateFizzBuzz(start, end) {
 
     let range = [];
 
-    for (let number = start; number <= end; number = number + 1) {
+    for (let number = 1; number <= 100; number = number + 1) {
 
+        if (number % 3 == 0 && number % 5 == 0) {
+            number = 'FizzBuzz';
+        } else if (number % 3 == 0) {
+            number = 'Fizz';
+        } else if (number % 5 == 0) {
+            number = 'Buzz';
+        } else if (number % 3 !== 0 && number % 5 !== 0) {
+            number = number;
+        }
         range.push(number);
     }
 
-    return range;
+    return range; // [1, 2, 'Fizz', 4, 'Buzz']
 }
 
 // Puts the numbers on the page
 // View Function
-function displayFizzBuzz(numbersToDisplay) {
+function displayFizzBuzz(fizzBuzzArray) {
 
-    let tableHtml = '';
+    let tableHtml = ''; // <tr><td>1</td></tr><tr><td>2</td></tr>
 
-    for (let index = 0; index < numbersToDisplay.length; index = index + 1) {
+    for (let i = 0; i < fizzBuzzArray.length; i = i + 1) {
+        
+        let value = fizzBuzzArray[i];
 
-        let currentNumber = numbersToDisplay[index];
+        let html = `<tr><td>${value}</td></tr>`;
 
-        let className = '';
-
-        if (currentNumber % 2 == 0) {
-            className = 'even';
-        } else {
-            className = 'odd';
-        }
-
-        let tableRowHtml = `<tr><td class="${className}">${currentNumber}</td></tr>`;
-
-        tableHtml = tableHtml + tableRowHtml;
-
-
+        tableHtml = tableHtml + html;
     }
 
-    document.getElementById('results').innerHTML = tableHtml;
-
-
+    let tableBodyOnThePage = document.getElementById('results');
+    
+    tableBodyOnThePage.innerHTML = tableHtml;
 }
+
+
+
