@@ -1,7 +1,8 @@
-// Get the numbers from our form inputs 
+// Get the numbers from our form inputs & passing values to other functions
 // ENTRY POINT
 // Controller Function
 function getValues() {
+
     let fizzNumber = document.getElementById('startValue').value;
     let buzzNumber = document.getElementById('endValue').value;
     let stopNumber = document.getElementById('stopValue').value;
@@ -10,7 +11,7 @@ function getValues() {
     buzzNumber = Number(buzzNumber);
     stopNumber = Number(stopNumber);
 
-    //making sure we have a number in field
+    //Validating inputs from page
     if (isNaN(fizzNumber) == true || isNaN(buzzNumber) == true || isNaN(stopNumber) == true) {
 
         Swal.fire({
@@ -22,55 +23,75 @@ function getValues() {
 
 
     } else {
-        let numberArray = generateFizzBuzz(fizzNumber, buzzNumber);
 
-        displayFizzBuzz(numberArray);
+        let fbArray = generateFizzBuzz(fizzNumber, buzzNumber, stopNumber);
+
+        displayFizzBuzz(fbArray);
     }
+
+
 
 
 }
 
-// Busniess Logic - Creates every number in the input range
+// Busniess Logic - Creates an array of values according to the fizzbuzz rules
 // Data Model
-function generateFizzBuzz(start, end) {
+function generateFizzBuzz(fizzValue, buzzValue, max) {
 
-    let range = [];
+    //Check every number from 1 to "max"
+    //for each number, check if it is divisible by fizzValue
+    //check if it is divisible by buzzValue
+    //check if it is divisible by both
+    //then put the right value into the array
+    //then return that array
 
-    for (let number = 1; number <= 100; number = number + 1) {
+    let fbArray = [];
 
-        if (number % 3 == 0 && number % 5 == 0) {
-            number = 'FizzBuzz';
-        } else if (number % 3 == 0) {
-            number = 'Fizz';
-        } else if (number % 5 == 0) {
-            number = 'Buzz';
-        } else if (number % 3 !== 0 && number % 5 !== 0) {
-            number = number;
-        }
-        range.push(number);
+
+    for (let number = 1; number <= max; number = number + 1) {
+        
+        if (number % fizzValue == 0 && number % buzzValue == 0) {
+
+            fbArray.push('FizzBuzz');
+
+        } else if (number % buzzValue == 0) {
+
+            fbArray.push('Buzz');
+
+        } else if (number % fizzValue == 0) {
+
+            fbArray.push('Fizz');
+        
+        } else {
+
+            fbArray.push(number);
+        }        
+
     }
 
-    return range; // [1, 2, 'Fizz', 4, 'Buzz']
+    return fbArray;
+
+
 }
 
 // Puts the numbers on the page
 // View Function
-function displayFizzBuzz(fizzBuzzArray) {
+function displayFizzBuzz(fbArray) {
 
     let tableHtml = ''; // <tr><td>1</td></tr><tr><td>2</td></tr>
 
-    for (let i = 0; i < fizzBuzzArray.length; i = i + 1) {
+    for (let i = 0; i < fbArray.length; i = i + 1) {
         
-        let value = fizzBuzzArray[i];
+        let value = fbArray[i];
 
-        let html = `<tr><td>${value}</td></tr>`;
+        let html = `<div class="${value}">${value}</div>`;
 
         tableHtml = tableHtml + html;
     }
 
-    let tableBodyOnThePage = document.getElementById('results');
+    let tableOnThePage = document.getElementById('results');
     
-    tableBodyOnThePage.innerHTML = tableHtml;
+    tableOnThePage.innerHTML = tableHtml;
 }
 
 

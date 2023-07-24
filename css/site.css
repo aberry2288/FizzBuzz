@@ -85,4 +85,21 @@ body {
     padding-left: .5rem;
 }
 
+.Fizz,
+.Buzz,
+.FizzBuzz {
+    font-weight: bold;
+}
 
+.Fizz {
+    background-color: var(--ab-theme-200);
+}
+
+.Buzz {
+    background-color: var(--ab-theme-800);
+}
+
+.FizzBuzz {
+    background-color: var(--ab-theme-core);
+    color: var(--ab-light-color);
+}
