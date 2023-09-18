@@ -158,7 +158,7 @@
                                 
                                 let value = fbArray[i];
                         
-                                let html = `<div class="${value}">${value}</div>`;
+                                let html = <div class="${value}">${value}</div>;
                         
                                 tableHtml = tableHtml + html;
                             }
@@ -173,20 +173,17 @@
             <div class="col-12 col-lg-4">
                 <h5 class="border-bottom">Code Explained</h5>
                 <p>The code for FizzBuzz is structured in three functions:</p>
-                <p>The <code>getValues</code> function retrieves the numbers from the field on the page as a start and
-                    end number. Then, the code checks to see if the values in the start and end fields are in fact
-                    numbers and if the start number is greater than the end number. If the values in either field are
+                <p>The <code>getValues</code> function retrieves the numbers from the field on the page as a start, end and stop number.
+                    Then, the code checks to see if those values are in fact real
+                    numbers and checks to see if the start number is greater than the end number. If the values are
                     not numerical, or, if the start number is greater than the end number an error message will appear
                     and the code will cease to run.</p>
-                <p> The <code>generateNumbers</code> function then creates an array to put numbers inside of. It checks
-                    to see if the start number and then the next number is greater than or equal to the end number and
-                    adds one to that number. The code then adds all of the numbers to the array and returns that range
-                    of numbers back to the previous function.
+                <p> The <code>generateFizzBuzz</code> function then creates an array to put numbers inside of. Looping over each number provided by the user,
+                    the function checks to see if each number is divisible by the Fizz Value, the Buzz Value, or divisible by both values. This will determine if 
+                    the app shows Fizz, Buzz or FizzBuzz on the table that is being created to display. Then, the array of values is sent to the next function so that it can be displayed properly.
                 </p>
-                <p>Then, the <code>displayNumbers</code> function takes the current number and adds them to an index to
-                    display on the page. The function checks to see if the current number is even or odd by checking the
-                    remainder of that number after being divided by 2. If the number is even it will be displayed in
-                    bold using CSS. The JavaScript then uses HTML to display the table on the page in a list.</p>
+                <p> The <code>displayFizzBuzz</code> function takes each number or value and adds them to an index to
+                    display on the page. The JavaScript then uses HTML to display the table on the page in a list format.</p>
 
             </div>
         </div>
